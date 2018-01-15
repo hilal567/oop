@@ -39,11 +39,11 @@ private JTextField answerfield;
       nine= new JButton("9");
       zero= new JButton("0");
       decimal= new JButton(".");
-      neg= new JButton("±");
+      neg= new JButton("Â±");
       add= new JButton("+");
       sub= new JButton("-");
       multiply= new JButton("x");
-      div= new JButton("÷");
+      div= new JButton("Ã·");
       equals= new JButton("=");
       clear = new JButton("RESET");
       backspace = new JButton("DEL");
@@ -99,8 +99,8 @@ private JTextField answerfield;
       l10 .setPreferredSize(new Dimension(10,10));
       // instance of each class that is created.
       
-      Numbers n = new Numbers();// instance of the class that has numbers and other characters.
-      Calc c = new Calc();// instance of the class that has all the calculations that will take place in this calculator 
+      Display n = new Display();// instance of the class that has numbers and other characters.
+      Calculations c = new Calculations();// instance of the class that has all the calculations that will take place in this calculations 
       
       
       //ACTIONLISTENERS
@@ -117,7 +117,7 @@ private JTextField answerfield;
    
       //Panels to project the numbers with the empty labels to space the buttons out 
       contentPanel= new JPanel();
-      contentPanel.setBackground(Color.getHSBColor(6, 90, 293));
+      contentPanel.setBackground(Color.getHSBColor(6, 90, 293));//setting the background colour.
       contentPanel.setLayout(new FlowLayout());
       contentPanel.add(answerfield, BorderLayout.NORTH);
       contentPanel.add(l4);contentPanel.add(l5);contentPanel.add(clear);contentPanel.add(l10);contentPanel.add(on);contentPanel.add(off);
@@ -134,7 +134,7 @@ private JTextField answerfield;
         throw new UnsupportedOperationException("Not supported yet.");
     }
     //class to display numbers and signals
-  private class Numbers implements ActionListener{
+  private class Display implements ActionListener{
      public void actionPerformed(ActionEvent event){
         JButton src = (JButton) event.getSource(); 
         if(event.getSource()==on)
@@ -375,7 +375,7 @@ private JTextField answerfield;
   
   
   //the calculation class
-   private class Calc implements ActionListener{
+   private class Calculations implements ActionListener{
         public void actionPerformed(ActionEvent event){
           JButton src = (JButton) event.getSource(); 
           
@@ -388,12 +388,12 @@ private JTextField answerfield;
                       operation = '+';
                   }else
                       if(first_number != null && second_number != null){
-                          System.out.println("Two operations only");
+                          //can make two operations only
                       }
           }
           if(src.equals(sub)){
               if(first_number==null){
-                  System.out.println("Choose your numbers first");
+                   //you havent chosen any numbers 
               }else
                   if(first_number != null && second_number == null){
                       opChosen= true;
@@ -412,19 +412,19 @@ private JTextField answerfield;
                       operation = '*';
                   }else
                       if(first_number != null && second_number != null){
-                          System.out.println("Two operations only");
+                          //can perform one operation at a time 
                       }
           }
           if(src.equals(div)){
               if(first_number==null){
-                  System.out.println("Choose your numbers first");
+                 //no numbers have been selected
               }else
                   if(first_number != null && second_number == null){
                       opChosen= true;
                       operation = '/';
                   }else
                       if(first_number != null && second_number != null){
-                          System.out.println("Two operations only");
+                         //can perform one operation at a time 
                       }
           }
           if(src.equals(equals)){
@@ -438,27 +438,27 @@ private JTextField answerfield;
               if(first_number != null && second_number !=null){
                   double r1 = 0.0, r2=0.0;
                   
-                  r1= Double.parseDouble(first_number);
-                  r2= Double.parseDouble(second_number);
+                  first_num1= Double.parseDouble(first_number);
+                  second_num2= Double.parseDouble(second_number);
                   
                   switch(operation){
                   case '+': 
-                     answer= r1 + r2;
+                     answer=  first_num1 + second_num2;
                      break;
                   case '-': 
-                      answer= r1 - r2;
+                      answer=  first_num1 - second_num2;
                       break;
                   case '*': 
-                      answer= r1 * r2;
+                      answer=  first_num1 * second_num2;
                       break;
                   case '/': 
-                      answer= r1 / r2;
+                      answer=  first_num1 /  second_num2;
                       break;
                   } 
                   
                   sanswer= Double.toString(answer);
                   answerfield.setText(sanswer); 
-                  if(operation == '/' && r2 == 0.0) {
+                  if(operation == '/' && second_num2== 0.0) {
                 	  answerfield.setText("Math ERROR");
                   }
                  }
